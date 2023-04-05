@@ -1,11 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
-module.exports = {
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
-  prefix: "bz-",
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
+  darkMode: "class",
+  content: ["./src/pages/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -31,7 +30,7 @@ module.exports = {
         quantum: "#303030",
         optimaBlack: "#070707",
         grayScale: "rgba(78, 93, 120, 1)",
-        primaryBlue: "#377DFF"
+        primaryBlue: "#377DFF",
       },
       backgroundColor: {
         "lightest-red": "rgba(243, 233, 233, 1)",
@@ -39,10 +38,10 @@ module.exports = {
         "light-dark-ash": "rgba(238, 238, 238, 1)",
         "dark-blue": "rgba(34, 75, 218, 1)",
         "primary-black": "rgba(23, 32, 57, 1)",
+        "dark-mode": "rgba(25, 28, 33, 1)",
         "modal-white": "rgba(255, 255, 255, 0.5)",
         input: "#ECECF4",
       },
-      width: {},
       boxShadow: {
         logo: "33px 14px 43px 2px rgba(0, 0, 0, 0.15)",
         modal: "0px 19px 19px 1px rgba(0, 0, 0, 0.25)",
@@ -53,4 +52,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+});

@@ -1,0 +1,7 @@
+.bgHeader {
+  background-color: var(--bg-header);
+}
+
+.borderColor {
+  border-color: var(--border-color);
+}
