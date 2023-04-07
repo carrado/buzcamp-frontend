@@ -5,3 +5,16 @@
 .borderColor {
   border-color: var(--border-color);
 }
+
+.bgCard {
+  background-color: var(--card-bg) !important;
+}
+
+.searchBg {
+  background-color: var(--comment-bg) !important;
+}
+
+.avatarFont {
+  font-family: Roboto !important;
+  font-weight: bold !important;
+}
