@@ -6,7 +6,7 @@ import { useState } from "react";
 import Avatar from "react-avatar";
 import Link from "next/link";
 
-export default function SearchInput({ className }) {
+export default function SearchInput({ className, placeHolder, width }) {
   const ref = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const handleChange = (e) => {
@@ -46,7 +46,7 @@ export default function SearchInput({ className }) {
   ];
   return (
     <>
-      <div className="flex flex-col w-3/4">
+      <div className={`flex flex-col ${width}`}>
         <div className={`flex ${className}`}>
           <div className="px-3 py-2">
             <Image
@@ -60,7 +60,7 @@ export default function SearchInput({ className }) {
             type={"text"}
             value={inputValue}
             onChange={(e) => handleChange(e)}
-            placeholder={"Search for something here..."}
+            placeholder={placeHolder}
             style={{ width: "100%", backgroundColor: "transparent" }}
             autoComplete="off"
           />

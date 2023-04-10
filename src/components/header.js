@@ -11,7 +11,9 @@ export default function Header({ themeState, setThemeState }) {
 
   return (
     <>
-      <div className={`w-full flex px-4 py-3 h-1-2 ${appStyles.bgHeader}`}>
+      <div
+        className={`w-full flex px-4 fixed top py-3 h-1-2 ${appStyles.bgHeader}`}
+      >
         <div className="flex w-1/6">
           <Image
             src="/icons/bzcmp-logo.png"
@@ -23,7 +25,9 @@ export default function Header({ themeState, setThemeState }) {
         </div>
         <div className="flex w-1/3 flex-grow">
           <SearchInput
-            className={`border ${appStyles.borderColor} p-1 rounded-md`}
+            className={`border ${appStyles.borderColor} p-1 text-sm rounded-md`}
+            placeHolder="Search for something here..."
+            width={"w-3/4"}
             variant
           />
         </div>
