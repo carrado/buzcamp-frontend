@@ -17,15 +17,19 @@ html.light {
   --comment-bg: #f0f2f5;
   --wash-timeline: rgba(78, 93, 120, 0.03);
   --web-wash: rgba(78, 93, 120, 1);
+  --lighter-small: rgba(78, 93, 120, 0.6);
+  --modal-background: rgba(25, 28, 33, 0.5);
 }
 
 html.dark {
-  --bg-header: transparent;
+  --bg-header: #18191a;
   --border-color: rgba(255, 255, 255, 0.2);
   --card-bg: #18191a;
   --comment-bg: #3a3b3c;
   --wash-timeline: rgba(33, 40, 51, 1);
   --web-wash: rgba(255, 255, 255, 1);
+  --lighter-small: rgba(78, 93, 120, 1);
+  --modal-background: rgba(25, 28, 33, 0.8);
 }
 
 /* cyrillic-ext */
@@ -128,6 +132,23 @@ input {
   }
 }
 
+[contenteditable="true"]:empty:before {
+  content: attr(placeholder);
+  pointer-events: none;
+  display: block; /* For Firefox */
+}
+
+div {
+  outline: none;
+}
+
+@-moz-document url-prefix() {
+  div:focus {
+    border-color: transparent;
+    outline: none;
+  }
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -160,8 +181,35 @@ input {
   width: 16.66667%;
 }
 
+.w-1\/2-3 {
+  width: 57.5%;
+}
+
+.shadow-sm {
+  --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.my-1 {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.mt-5 {
+  margin-top: 1.25rem;
 }
 
 .mr-3 {
@@ -172,8 +220,17 @@ input {
   height: 3.8rem;
 }
 
+.cursor-text {
+  cursor: text;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .timeline-bg {
   background-color: var(--wash-timeline);
+  z-index: 0 !important;
 }
 
 .my-3 {
@@ -184,6 +241,10 @@ input {
 .mx-3 {
   margin-left: 0.75rem;
   margin-right: 0.75rem;
+}
+
+.-mt-3\/2 {
+  margin-top: -0.65rem;
 }
 
 .w-7 {
@@ -200,6 +261,10 @@ input {
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.text-grey-light {
+  color: var(--lighter-small);
 }
 
 .bg-desire {
@@ -220,23 +285,27 @@ input {
 }
 
 .class-0 {
-  background-color: #e71eb3 !important;
+  background-color: #377dff !important;
 }
 
 .class-1 {
-  background-color: #0000ff !important;
+  background-color: #377dff !important;
 }
 
 .class-2 {
-  background-color: #48b6a2 !important;
+  background-color: #377dff !important;
 }
 
 .class-3 {
-  background-color: #946d96 !important;
+  background-color: #377dff !important;
 }
 
 .tr-color {
   color: inherit !important;
+}
+
+.font-500 {
+  font-weight: 500;
 }
 
 [data-hover]:hover {
@@ -247,4 +316,8 @@ input {
 [data-menu]:hover {
   background-color: var(--wash-timeline);
   border-radius: 10px;
+}
+
+.modal-bg {
+  background-color: var(--modal-background);
 }

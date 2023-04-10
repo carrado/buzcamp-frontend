@@ -1,5 +1,7 @@
 .bgHeader {
   background-color: var(--bg-header);
+  z-index: 0;
+  top: 0;
 }
 
 .borderColor {
