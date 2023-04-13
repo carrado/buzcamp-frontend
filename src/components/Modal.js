@@ -1,6 +1,6 @@
 export default function Modal({ open, closeModal }) {
   const handleModalClick = () => {
-    closeModal('modal');
+    closeModal("modal");
   };
 
   return (

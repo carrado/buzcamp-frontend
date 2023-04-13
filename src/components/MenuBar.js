@@ -72,7 +72,7 @@ export default function MenuBar({ themeState }) {
   ];
   return (
     <>
-      {theme &&
+      {theme && (
         <>
           <div className="flex flex-col w-2/12 h-full fixed px-3 -mt-2">
             {listItems.map((item) => (
@@ -107,7 +107,7 @@ export default function MenuBar({ themeState }) {
             ))}
           </div>
         </>
-      }
-      </>
+      )}
+    </>
   );
 }

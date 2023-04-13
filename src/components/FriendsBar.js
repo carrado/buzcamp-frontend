@@ -53,7 +53,7 @@ export default function FriendsBar({ themeState }) {
 
   return (
     <>
-      {theme &&
+      {theme && (
         <>
           <div
             className="flex flex-col w-2/12 h-full fixed p-3 -mt-3"
@@ -61,7 +61,9 @@ export default function FriendsBar({ themeState }) {
           >
             <div className="w-full flex flex-col">
               <div className="flex flex-grow px-1">
-                <span className="text-base flex flex-grow font-500">Friends</span>
+                <span className="text-base flex flex-grow font-500">
+                  Friends
+                </span>
                 <div className="flex w-max flex-col justify-center">
                   <span className="flex w-max">
                     <Image
@@ -79,10 +81,11 @@ export default function FriendsBar({ themeState }) {
                 {activeFriends.map((friends) => (
                   <div className="w-full h-12 mb-4 py-3 flex" key={friends.id}>
                     <Avatar
-                      className={`${appStyles.avatarFont} ${friends.photo === null
+                      className={`${appStyles.avatarFont} ${
+                        friends.photo === null
                           ? `class-${Math.floor(Math.random() * 4)}`
                           : ``
-                        }`}
+                      }`}
                       name={friends.name}
                       src={`/${friends.photo}`}
                       size="30"
@@ -120,7 +123,7 @@ export default function FriendsBar({ themeState }) {
             </div>
           </div>
         </>
-      }
-      </>
+      )}
+    </>
   );
 }
