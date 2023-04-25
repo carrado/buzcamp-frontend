@@ -25,20 +25,23 @@ export default function Home() {
       <Meta title={"BuzCamp"} />
       <Header themeState={theme} setThemeState={setValue} />
       <div
-        className="flex w-full flex-wrap my-2"
+        className="flex w-full flex-wrap my-2 md:px-1"
         style={{ marginTop: "4.8rem" }}
       >
-        <div className="flex flex-col w-2/12">
+        <div className="flex flex-col lg:w-2/12 sm:w-4/12 md:w-4/12">
           <MenuBar themeState={theme} />
         </div>
 
-        <div className="timeline-bg w-4/6 p-5 rounded-xl flex flex-wrap h-full">
-          <div className="w-1/2-3 h-full flex flex-col mr-3">
+        <div className="timeline-bg lg:w-4/6 sm:w-8/12 md:w-8/12 p-5 rounded-xl flex flex-wrap h-full">
+          <div className="w-1/2-3 h-full lg:flex sm:hidden md:hidden flex-col mr-3">
+            <TimelineForm profile={profileData} themeState={theme} />
+          </div>
+          <div className="lg:hidden h-full lg:flex sm:w-full md:w-full flex-col">
             <TimelineForm profile={profileData} themeState={theme} />
           </div>
         </div>
 
-        <div className="flex flex-col w-2/12">
+        <div className="flex-col lg:w-2/12 sm:hidden md:hidden lg:flex">
           <FriendsBar themeState={theme} />
         </div>
       </div>
