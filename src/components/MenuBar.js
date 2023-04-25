@@ -74,7 +74,7 @@ export default function MenuBar({ themeState }) {
     <>
       {theme && (
         <>
-          <div className="flex flex-col w-2/12 h-full fixed px-3 -mt-2">
+          <div className="flex flex-col lg:w-2/12 sm:w-4/12 md:w-4/12 h-full fixed px-3 -mt-2">
             {listItems.map((item) => (
               <div
                 className="flex p-3 mb-4 w-full cursor-pointer"

@@ -1,6 +1,6 @@
 .bgHeader {
   background-color: var(--bg-header);
-  z-index: 0;
+  z-index: 5;
   top: 0;
 }
 

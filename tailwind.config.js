@@ -6,6 +6,16 @@ module.exports = withMT({
   darkMode: "class",
   content: ["./src/pages/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      'sm': '768px',
+      // => @media (min-width: 768px) { ... }
+
+      'md': '1024px',
+      // => @media (min-width: 1024px) { ... }
+
+      'lg': '1280px',
+      // => @media (min-width: 1280px) { ... }
+    },
     extend: {
       colors: {
         flame: "#F15A29",

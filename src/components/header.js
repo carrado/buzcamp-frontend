@@ -13,6 +13,7 @@ export default function Header({ themeState, setThemeState }) {
     <>
       <div
         className={`w-full flex px-4 fixed top py-3 h-1-2 ${appStyles.bgHeader}`}
+        data-header
       >
         <div className="flex w-1/6">
           <Image
@@ -23,7 +24,7 @@ export default function Header({ themeState, setThemeState }) {
             style={{ width: "35px", height: "40px" }}
           />
         </div>
-        <div className="flex w-1/3 flex-grow">
+        <div className="flex w-1/3 sm:w-1/2 md:w-1/2 flex-grow">
           <SearchInput
             className={`border ${appStyles.borderColor} p-1 text-sm rounded-md`}
             placeHolder="Search for something here..."
@@ -31,7 +32,7 @@ export default function Header({ themeState, setThemeState }) {
             variant
           />
         </div>
-        <div className="flex w-32 flex-grow -mt-1 text-sm">
+        <div className="lg:flex lg:w-32 sm:hidden md:hidden flex-grow -mt-1 text-sm">
           <Image
             src="/icons/light-icon.svg"
             height={20}

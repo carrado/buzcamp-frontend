@@ -69,6 +69,7 @@ export default function SearchInput({ className, placeHolder, width }) {
           <Card
             ref={ref}
             className={`px-3 py-2 w-full rounded-sm tr-color ${appStyles.bgCard}`}
+            style={{zIndex: 5}}
           >
             {searchResponse.map((response, index) => (
               <div className="flex flex-col w-full p-3" data-hover key={index}>
