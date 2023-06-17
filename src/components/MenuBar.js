@@ -89,7 +89,7 @@ export default function MenuBar({ themeState }) {
                       height={150}
                       width={150}
                       alt="search"
-                      style={{ width: "12px", height: "12px" }}
+                      style={{ width: "16px", height: "16px" }}
                     />
                   </div>
                   <div className="flex mx-4 w-max">

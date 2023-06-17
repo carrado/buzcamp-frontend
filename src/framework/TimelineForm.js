@@ -96,10 +96,13 @@ export default function TimelineForm({ profile, themeState }) {
     if (modalOpen) {
       let input = document.createElement("input");
       input.type = "file";
-      input.setAttribute("accept", ".docx, .pdf");
+      input.setAttribute("accept", ".pdf");
+      input.setAttribute("multiple", true);
       input.onchange = (_) => {
         // you can use this method to get file and perform respective operations
         let files = Array.from(input.files);
+
+        console.log(files);
 
         setPhotoLength(files.length);
         setMediaType("document");
@@ -131,7 +134,7 @@ export default function TimelineForm({ profile, themeState }) {
 
         const hasVideo = files.some((e) => e.type.includes("video"));
 
-        if (files.length > 1 && hasVideo) {
+        if (files.length > 4 || hasVideo) {
           setPreviewFiles(false);
           toast('Maximum of 4 images or 1 video required', {
             position: "bottom-center",
@@ -194,7 +197,7 @@ export default function TimelineForm({ profile, themeState }) {
                         <MenuHandler>
                           <Button
                             variant="text"
-                            className="flex items-center text-inherit font-semibold w-32 timeline-bg mx-3 px-3 text-sm capitalize tracking-normal"
+                            className="flex items-center text-inherit w-32 timeline-bg mx-3 px-3 text-sm capitalize tracking-normal"
                           >
                             <span className="text-sm font-500 flex flex-grow mr-2">
                               <Image
@@ -285,6 +288,7 @@ export default function TimelineForm({ profile, themeState }) {
                   fileLength={photoLength}
                   fileType={mediaType}
                   files={viewFiles}
+                  themeState={themeState}
                 />
               </div>
             )}
@@ -372,7 +376,7 @@ export default function TimelineForm({ profile, themeState }) {
               {/** Button */}
               <div className="w-1/4 flex flex-grow justify-center mt-1">
                 <div className="flex flex-col justify-center">
-                  <Button> Post </Button>
+                  <Button disabled> Post </Button>
                 </div>
               </div>
             </div>
