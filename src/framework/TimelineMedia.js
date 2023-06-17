@@ -2,55 +2,61 @@ import Link from "next/link";
 import NextImage from "next/image";
 import { useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import { Viewer, Worker } from '@react-pdf-viewer/core';
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 
-export default function TimelineMedia({ fileLength, fileType, files, themeState }) {
-  console.log(files)
+export default function TimelineMedia({ fileLength, fileType, files }) {
   const singleImg = useRef([]);
+  const img = new Image();
 
-  if ((fileType !== "video-image") && (fileType !== "document")) {
-    const img = new Image();
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-    files.forEach((file) => {
-      img.src = `${file.url}`;
-      img.onload = () => {
-        let ratio;
-        let width;
-        let height;
+  files.forEach((file) => {
+    img.src = `${file.url}`;
+    img.onload = () => {
+      let ratio;
+      let width;
+      let height;
 
-        if (img.naturalHeight > img.naturalWidth) {
+      if (img.naturalHeight > img.naturalWidth) {
+        ratio = img.naturalHeight / 500;
+        width = img.naturalWidth / ratio;
+        height = img.naturalHeight / ratio;
+      } else if (img.naturalWidth > img.naturalHeight) {
+        ratio = img.naturalWidth / 500;
+        width = img.naturalWidth / ratio;
+        height = img.naturalHeight / ratio;
+      } else {
+        if (img.naturalHeight > 500) {
           ratio = img.naturalHeight / 500;
           width = img.naturalWidth / ratio;
           height = img.naturalHeight / ratio;
-        } else if (img.naturalWidth > img.naturalHeight) {
-          ratio = img.naturalWidth / 500;
-          width = img.naturalWidth / ratio;
-          height = img.naturalHeight / ratio;
-        } else {
-          if (img.naturalHeight > 500) {
-            ratio = img.naturalHeight / 500;
-            width = img.naturalWidth / ratio;
-            height = img.naturalHeight / ratio;
-          }
         }
+      }
 
-        if (singleImg.current.length > 0) {
-          if (fileLength <= 2) {
-            singleImg.current.forEach((dom) => {
-              if (dom) {
-                dom.style.width = `508px`;
-                dom.style.height = `${Math.ceil(height)}px`;
-              }
-            });
-          }
-          else {
-            singleImg.current[0].style.width = `508px`;
-            singleImg.current[0].style.height = `${Math.ceil(height)}px`;
-            singleImg.current[1].style.height = `${Math.ceil(height)}px`;
-          }
+      if (singleImg.current.length > 0) {
+        if (fileLength <= 2) {
+          singleImg.current.forEach((dom) => {
+            if (dom) {
+              dom.style.width = `508px`;
+              dom.style.height = `${Math.ceil(height)}px`;
+            }
+          });
         }
-      };
-    });
+        else {
+          singleImg.current[0].style.width = `508px`;
+          singleImg.current[0].style.height = `${Math.ceil(height)}px`;
+          singleImg.current[1].style.height = `${Math.ceil(height)}px`;
+        }
+      }
+    };
+  });
+
+
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
   }
+
 
   return (
     <>
@@ -92,7 +98,7 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
                                     style={{ zIndex: 0 }}
                                   >
                                     <div
-                                      className="w-full bg-cover bg-no-repeat rounded-xl h-full absolute bg-center top-0 right-0 bottom-0 left-0 bz-css-1dfj5n"
+                                        className="w-full bg-cover bg-no-repeat rounded-xl h-full absolute bg-center top-0 right-0 bottom-0 left-0 bz-css-1dfj5n"
                                       style={{
                                         backgroundImage: `url(${file.url})`,
                                         zIndex: -1,
@@ -132,8 +138,9 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
                     <div className="flex flex-grow flex-row bz-css-1dfj5n">
                       {files.map((file, index) => (
                         <div
-                          className={`bz-css-1dfj5n relative flex-grow ${index === 0 ? "mr-1" : ""
-                            }`}
+                          className={`bz-css-1dfj5n relative flex-grow ${
+                            index === 0 ? "mr-1" : ""
+                          }`}
                           key={index}
                           style={{ flexBasis: "0px", maxWidth: "255px" }}
                         >
@@ -194,63 +201,18 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
                 >
                   <div className="bz-css-1dfj5n">
                     <div className="flex flex-grow flex-row bz-css-1dfj5n">
-                      <div
-                        className={`bz-css-1dfj5n relative flex-grow mr-1`}
-                        style={{ flexBasis: "0px" }}
-                      >
-                        <div className="w-full h-full flex-grow bz-css-1dfj5n">
-                          <Link
-                            href=""
-                            className="cursor-pointer bz-css-1dfj5n overflow-hidden"
-                          >
-                            <div
-                              className="bz-css-1dfj5n overflow-hidden block"
-                              ref={(el) => (singleImg.current[0] = el)}
-                            >
-                              <div className="block overflow-hidden bz-css-1dfj5n w-full h-full">
-                                <div className="absolute w-full h-full top-0 left-0 bottom-0">
-                                  <div
-                                    className="bz-css-1dfj5n bottom-0 left-0 r-11wrixw r-61z16t overflow-hidden absolute right-0 top-0 h-full r-417010"
-                                    style={{ zIndex: 0 }}
-                                  >
-                                    <div
-                                      className="w-full bg-cover rounded-xl bg-no-repeat h-full absolute bg-center top-0 right-0 bottom-0 left-0 bz-css-1dfj5n"
-                                      style={{
-                                        backgroundImage: `url(${files[0].url})`,
-                                        maxWidth: "255px",
-                                        zIndex: -1,
-                                      }}
-                                    >
-                                      <NextImage
-                                        src={`${files[0].url}`}
-                                        className="h-full w-full absolute opacity-0"
-                                        height={150}
-                                        width={150}
-                                        alt="menu"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col flex-grow"
-                        style={{ flexBasis: "0px" }}
-                        ref={(el) => (singleImg.current[1] = el)}
-                      >
                         <div
-                          className={`bz-css-1dfj5n relative flex-grow h-1/2 mb-1`}
+                          className={`bz-css-1dfj5n relative flex-grow mr-1`}
+                          style={{ flexBasis: "0px" }}
                         >
                           <div className="w-full h-full flex-grow bz-css-1dfj5n">
                             <Link
                               href=""
-                              className="cursor-pointer h-full bz-css-1dfj5n"
+                              className="cursor-pointer bz-css-1dfj5n overflow-hidden"
                             >
                               <div
-                                className="bz-css-1dfj5n h-full overflow-hidden block"
+                                className="bz-css-1dfj5n overflow-hidden block"
+                                ref={(el) => (singleImg.current[0] = el)}
                               >
                                 <div className="block overflow-hidden bz-css-1dfj5n w-full h-full">
                                   <div className="absolute w-full h-full top-0 left-0 bottom-0">
@@ -259,15 +221,15 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
                                       style={{ zIndex: 0 }}
                                     >
                                       <div
-                                        className="w-full bg-cover rounded-xl bg-no-repeat h-full absolute bg-center top-0 right-0 bottom-0 left-0 bz-css-1dfj5n"
+                                      className="w-full bg-cover rounded-xl bg-no-repeat h-full absolute bg-center top-0 right-0 bottom-0 left-0 bz-css-1dfj5n"
                                         style={{
-                                          backgroundImage: `url(${files[1].url})`,
+                                          backgroundImage: `url(${files[0].url})`,
                                           maxWidth: "255px",
                                           zIndex: -1,
                                         }}
                                       >
                                         <NextImage
-                                          src={`${files[1].url}`}
+                                          src={`${files[0].url}`}
                                           className="h-full w-full absolute opacity-0"
                                           height={150}
                                           width={150}
@@ -280,6 +242,51 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
                               </div>
                             </Link>
                           </div>
+                      </div>
+
+                      <div className="flex flex-col flex-grow"
+                        style={{ flexBasis: "0px" }}
+                        ref={(el) => (singleImg.current[1] = el)}
+                      >
+                      <div
+                        className={`bz-css-1dfj5n relative flex-grow h-1/2 mb-1`}
+                      >
+                        <div className="w-full h-full flex-grow bz-css-1dfj5n">
+                          <Link
+                            href=""
+                            className="cursor-pointer h-full bz-css-1dfj5n"
+                          >
+                            <div
+                                className="bz-css-1dfj5n h-full overflow-hidden block"
+                            >
+                              <div className="block overflow-hidden bz-css-1dfj5n w-full h-full">
+                                <div className="absolute w-full h-full top-0 left-0 bottom-0">
+                                  <div
+                                    className="bz-css-1dfj5n bottom-0 left-0 r-11wrixw r-61z16t overflow-hidden absolute right-0 top-0 h-full r-417010"
+                                    style={{ zIndex: 0 }}
+                                  >
+                                    <div
+                                        className="w-full bg-cover rounded-xl bg-no-repeat h-full absolute bg-center top-0 right-0 bottom-0 left-0 bz-css-1dfj5n"
+                                      style={{
+                                        backgroundImage: `url(${files[1].url})`,
+                                        maxWidth: "255px",
+                                        zIndex: -1,
+                                      }}
+                                    >
+                                      <NextImage
+                                        src={`${files[1].url}`}
+                                        className="h-full w-full absolute opacity-0"
+                                        height={150}
+                                        width={150}
+                                        alt="menu"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
                         </div>
 
                         <div
@@ -330,7 +337,7 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
             </>
           )}
 
-
+          
 
           {fileLength === 4 && (
             <>
@@ -527,51 +534,25 @@ export default function TimelineMedia({ fileLength, fileType, files, themeState 
 
       {fileType === "document" && (
         <>
-          <div className="flex flex-col">
-            {files.map((file, index) =>
-            (
-              <div
-                className="overflow-hidden my-1 flex justify-center"
-                key={index}
-              >
-                <div className="w-1/2 flex flex-grow p-2 mx-3 timeline-bg rounded-md">
-                  <div className="flex flex-col flex-grow justify-center">
-                    <NextImage
-                      src={`/icons/${themeState === "dark"
-                        ? "document-light.svg"
-                        : "document-dark.svg"
-                        }`}
-                      height={150}
-                      width={150}
-                      alt="menu"
-                      style={{ width: "38px", height: "16px" }}
-                    />
-                  </div>
-                  <div className="flex flex-grow overflow-hidden" style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                    <span className="capitalize">
-                      {file.url.name}
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="flex flex-col justify-center cursor-pointer"
-                  onClick={() => handleModalClick()}
-                >
-                  <NextImage
-                    src={`/icons/${themeState === "dark"
-                      ? "close-light.svg"
-                      : "close-dark.svg"
-                      }`}
-                    height={150}
-                    width={150}
-                    alt="close"
-                    style={{ width: "14px", height: "14px" }}
+          {files.map((file, index) =>
+          (
+            <div
+              className="overflow-hidden flex justify-center rounded-xl"
+              key={index}
+            >
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.js">
+                <div style={{ height: '450px' }}>
+                  <Viewer
+                    fileUrl={`${file.url.name}`}
+                    plugins={[
+                      defaultLayoutPluginInstance,
+                    ]}
                   />
                 </div>
-              </div>
-            ))}
-          </div>
-        </>
+              </Worker>
+            </div>
+          ))}
+          </>
       )}
     </>
   );
